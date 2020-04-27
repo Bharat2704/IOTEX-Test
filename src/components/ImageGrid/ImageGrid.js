@@ -4,8 +4,13 @@ import './styles.css';
 const ImageGrid = ({ images }) => (
   <div className='image-grid'>
     {
-      images.map(({id, value}) => (
-        <div key={id}>{value}</div>
+      images.map(({id, farm, server, secret}) => (
+        <div key={id}>
+          <img
+            src={`http://farm${farm}.static.flickr.com/${server}/${id}_${secret}.jpg`}
+            alt='Not Found'
+          />
+        </div>
       ))
     }
   </div>

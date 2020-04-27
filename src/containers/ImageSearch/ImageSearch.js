@@ -1,27 +1,51 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import axios from 'axios';
 import { Search, ImageGrid } from '../../components';
 import './styles.css';
 
 const ImageSearch = () => {
-  const onSubmit = (searchWord) => {
-    console.log('Form submitted with value: ', searchWord);
-  }
+  const [keyword, setKeyword] = useState('');
+  const [currPage, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [result, setResult] = useState([]);
+
+  const fetchData = useCallback(
+    async () => {
+      const { data } = await axios({
+        method: 'get',
+        url: `https://api.flickr.com/services/rest/`,
+        params: {
+          method: 'flickr.photos.search',
+          api_key: '3e7cc266ae2b0e0d78e279ce8e361736',
+          format: 'json',
+          nojsoncallback: 1,
+          safe_search: 1,
+          text: keyword,
+          page: currPage,
+        }
+      });
+
+      const { page, pages, photo } = data.photos;
+
+      setPage(page);
+      setTotalPages(pages);
+      setResult(photo);
+    }, [keyword, currPage]
+  );
+
+  const onChange = (searchWord) => {
+    setKeyword(searchWord);
+  };
+
+  const onSubmit = () => fetchData();
+
   return (
     <div className='container'>
-      <Search onSubmit={onSubmit} />
+      <Search onSubmit={onSubmit} onChange={onChange} />
       <ImageGrid
-        images={[
-          {id: 1, value: 1},
-          {id: 2, value: 2},
-          {id: 3, value: 3},
-          {id: 4, value: 4},
-          {id: 5, value: 5},
-          {id: 6, value: 6},
-          {id: 7, value: 7},
-          {id: 8, value: 8},
-          {id: 9, value: 9},
-        ]}
+        images={result}
       />
+      {currPage < totalPages ? <input type='button' onClick={fetchData} /> : null}
     </div>
   );
 };

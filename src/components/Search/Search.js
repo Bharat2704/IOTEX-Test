@@ -1,22 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import './styles.css';
 
-const Search = ({ onSubmit }) => {
-  const [ searchWord, setSearchWord ] = useState('');
+const Search = ({ onSubmit, onChange }) => {
   const handleSubmit = useCallback(
     (ev) => {
       ev.preventDefault();
-      onSubmit(searchWord);
+      onSubmit();
     },
-    [searchWord, onSubmit]
+    [onSubmit]
   );
   return (
     <form onSubmit={handleSubmit}>
       <input
         type='text'
         placeholder='Search...'
-        value={searchWord}
-        onChange={({ target }) => setSearchWord(target.value)}
+        onChange={({ target }) => onChange(target.value)}
       />
       <input type='submit' value='Search' />
     </form>
