@@ -11,14 +11,23 @@ const Search = ({ onSubmit, onChange }) => {
     [searchWord, onSubmit]
   );
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type='text'
-        placeholder='Search...'
-        onChange={({ target }) => setSearchWord(target.value)}
-      />
-      <button type='submit'>Search</button>
-    </form>
+    <nav class="navbar">
+      <form className="searchbar" onSubmit={handleSubmit}>
+        <label>
+          <input 
+            type='text'
+            placeholder='Search pics...'
+            onChange={({ target }) => setSearchWord(target.value)}
+            className="searchbar-input" />
+        </label>
+        <button 
+          type="submit" 
+          className="btn btn-green btn-search"
+        >
+          Search
+        </button>
+      </form>
+    </nav>
   );
 };
 

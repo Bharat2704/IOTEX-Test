@@ -1,12 +1,31 @@
-form {
-  margin: 10px 0 50px;
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #F0F0F0;
 }
 
-input,
-button {
-  padding: 5px;
+.searchbar {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-input[type='text'] {
-  margin-right: 10px;
+.searchbar-input {
+  padding: .5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: 2px solid gray;
+  min-width: 300px;
+}
+
+.searchbar-input:focus {
+  border: 2px solid #42b983;
+}
+
+.btn-search {
+  padding: .5rem 2rem;
+  margin-left: 1rem;
 }

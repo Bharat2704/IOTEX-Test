@@ -57,7 +57,12 @@ const ImageSearch = () => {
         images={result}
       />
       {currPage < totalPages ?
-        <button onClick={loadMore}>Load more!</button>
+        <button
+          onClick={loadMore}
+          className='btn btn-green'
+        >
+          Load more!
+        </button>
         : null
       }
     </div>
