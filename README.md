@@ -9,8 +9,10 @@
 - Unit tests
 - UI Library like antd or material-ui
 - Better error handling and error boundaries
-- Never check-in API keys also [shouldn't use .env with plain text secrets](https://create-react-app.dev/docs/adding-custom-environment-variables/) as they are bundled with the React APP. Use a backend server for secrets always.
+- Never check-in API keys also [shouldn't use `.env` with plain text secrets](https://create-react-app.dev/docs/adding-custom-environment-variables/) as they are bundled with the React APP. Use a backend server for secrets always.
 - May be use a CSS pre-processer like SASS or LESS for consistent styling with the help of variables, etc.
+- Responsive design
+- Virtualized scroll instead of a "Load more" button which automatically fetches next page when scroll reaches the end.
 
 <hr>
 
