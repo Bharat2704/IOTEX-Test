@@ -1,10 +1,5 @@
 .image-grid {
   display: flex;
   flex-wrap: wrap;
-}
-
-.image-grid > div {
-  flex: 1 0 21%;
-  margin: 5px;
-  height: 100px;
+  list-style: none;
 }

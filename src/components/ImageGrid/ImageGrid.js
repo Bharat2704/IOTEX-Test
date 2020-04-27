@@ -1,16 +1,16 @@
 import React from 'react';
+import ImageCard from '../ImageCard/ImageCard';
 import './styles.css';
 
 const ImageGrid = ({ images }) => (
   <div className='image-grid'>
     {
-      images.map(({id, farm, server, secret}) => (
-        <div key={id}>
-          <img
-            src={`http://farm${farm}.static.flickr.com/${server}/${id}_${secret}.jpg`}
-            alt='Not Found'
-          />
-        </div>
+      images.map(({id, farm, server, secret, title}) => (
+        <ImageCard
+          key={id}
+          url={`http://farm${farm}.static.flickr.com/${server}/${id}_${secret}.jpg`}
+          title={title}
+        />
       ))
     }
   </div>
