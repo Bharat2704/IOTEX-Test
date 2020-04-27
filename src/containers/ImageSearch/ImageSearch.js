@@ -8,10 +8,14 @@ const ImageSearch = () => {
   const [currPage, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!keyword) return;
+
+      // Display loader while fetching data
+      setLoading(true);
 
       const { data } = await axios({
         method: 'get',
@@ -36,6 +40,9 @@ const ImageSearch = () => {
         setPage(page);
         setResult(photo);
       }
+
+      // Hide loader once date is fetched
+      setLoading(false);
     }
 
     fetchData();
@@ -56,14 +63,17 @@ const ImageSearch = () => {
       <ImageGrid
         images={result}
       />
-      {currPage < totalPages ?
-        <button
-          onClick={loadMore}
-          className='btn btn-green'
-        >
-          Load more!
-        </button>
-        : null
+      {loading ?
+        <div className='loader-text'>Loading ...</div> :
+        (
+          currPage < totalPages &&
+          <button
+            onClick={loadMore}
+            className='btn btn-green btn-load-more'
+          >
+            Load more!
+          </button>
+        )
       }
     </div>
   );

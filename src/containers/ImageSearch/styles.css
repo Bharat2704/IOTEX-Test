@@ -22,3 +22,8 @@
   color: white;
   font-weight: bold;
 }
+
+.loader-text,
+.btn-load-more {
+  margin-top: 1rem;
+}
