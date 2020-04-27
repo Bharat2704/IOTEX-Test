@@ -11,7 +11,7 @@ const Search = ({ onSubmit, onChange }) => {
     [searchWord, onSubmit]
   );
   return (
-    <nav class="navbar">
+    <nav className="navbar">
       <form className="searchbar" onSubmit={handleSubmit}>
         <label>
           <input 

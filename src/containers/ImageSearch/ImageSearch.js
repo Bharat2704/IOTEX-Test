@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import appConfig from '../../config';
 import { Search, ImageGrid } from '../../components';
 import './styles.css';
 
@@ -22,12 +23,13 @@ const ImageSearch = () => {
         url: `https://api.flickr.com/services/rest/`,
         params: {
           method: 'flickr.photos.search',
-          api_key: '3e7cc266ae2b0e0d78e279ce8e361736',
+          api_key: appConfig.flickrAPIKey,
           format: 'json',
           nojsoncallback: 1,
           safe_search: 1,
           text: keyword,
           page: currPage,
+          per_page: 50,
         }
       });
   
