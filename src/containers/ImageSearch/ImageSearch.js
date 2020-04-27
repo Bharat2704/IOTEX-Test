@@ -56,27 +56,30 @@ const ImageSearch = () => {
 
   const onSubmit = (searchWord) => {
     setPage(1);
+    setResult([]);
     setKeyword(searchWord);
   };
 
   return (
     <div className='container'>
       <Search onSubmit={onSubmit} />
-      <ImageGrid
-        images={result}
-      />
-      {loading ?
-        <div className='loader-text'>Loading ...</div> :
-        (
-          currPage < totalPages &&
-          <button
-            onClick={loadMore}
-            className='btn btn-green btn-load-more'
-          >
-            Load more!
-          </button>
-        )
-      }
+      <div className='wrapper'>
+        <ImageGrid
+          images={result}
+        />
+        {loading ?
+          <div className='loader-text'>Loading ...</div> :
+          (
+            currPage < totalPages &&
+            <button
+              onClick={loadMore}
+              className='btn btn-green btn-load-more'
+            >
+              Load more!
+            </button>
+          )
+        }
+      </div>
     </div>
   );
 };
