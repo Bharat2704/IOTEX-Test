@@ -4,3 +4,7 @@
   width: 80%;
   text-align: center;
 }
+
+.container > input {
+  margin-top: 20px;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, ImageGrid } from '../../components';
 import './styles.css';
@@ -9,8 +9,10 @@ const ImageSearch = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [result, setResult] = useState([]);
 
-  const fetchData = useCallback(
-    async () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!keyword) return;
+
       const { data } = await axios({
         method: 'get',
         url: `https://api.flickr.com/services/rest/`,
@@ -24,28 +26,40 @@ const ImageSearch = () => {
           page: currPage,
         }
       });
-
+  
       const { page, pages, photo } = data.photos;
-
-      setPage(page);
+  
       setTotalPages(pages);
-      setResult(photo);
-    }, [keyword, currPage]
-  );
+      if (page > 1) {
+        setResult((result) => setResult([...result, ...photo]));
+      } else {
+        setPage(page);
+        setResult(photo);
+      }
+    }
 
-  const onChange = (searchWord) => {
+    fetchData();
+  }, [currPage, keyword]);
+
+  const loadMore = () => {
+    setPage((currPage) => currPage + 1);
+  };
+
+  const onSubmit = (searchWord) => {
+    setPage(1);
     setKeyword(searchWord);
   };
 
-  const onSubmit = () => fetchData();
-
   return (
     <div className='container'>
-      <Search onSubmit={onSubmit} onChange={onChange} />
+      <Search onSubmit={onSubmit} />
       <ImageGrid
         images={result}
       />
-      {currPage < totalPages ? <input type='button' onClick={fetchData} /> : null}
+      {currPage < totalPages ?
+        <button onClick={loadMore}>Load more!</button>
+        : null
+      }
     </div>
   );
 };
